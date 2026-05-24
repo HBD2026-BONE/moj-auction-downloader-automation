@@ -1,0 +1,48 @@
+name: Run MOJ Scraper 定時爬蟲任務
+
+# 觸發條件設定
+on:
+  schedule:
+    # 這裡使用的是 Cron 定時語法（設定為每天台灣時間早上 8:30 執行）
+    # 註：GitHub Actions 使用 UTC 時間，台灣時間 08:30 換算 UTC 為 00:30
+    - cron: '30 0 * * *'
+  workflow_dispatch: # 這行可以讓你隨時在 GitHub 網頁上點按鈕「手動執行」
+
+jobs:
+  run-crawler:
+    runs-on: ubuntu-latest # 使用最新的 Linux 虛擬機
+
+    steps:
+    # 1. 複製 GitHub 上的程式碼到虛擬機中
+    - name: Checkout repository code
+      uses: actions/checkout@v4
+
+    # 2. 設定 Python 環境
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.10' # ddddocr 在 3.10 環境下執行較為穩定
+
+    # 3. 安裝 Linux 系統底層圖形庫（重要：ddddocr 必備，否則會報 libGL 錯誤）
+    - name: Install Linux system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libgl1-mesa-glx libglib2.0-0
+
+    # 4. 安裝 Chrome 瀏覽器與驅動（供 Selenium 使用）
+    - name: Setup Chrome inside Ubuntu
+      uses: browser-actions/setup-chrome@v1
+      with:
+        chrome-version: stable
+
+    # 5. 安裝 Python 依賴套件
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    # 6. 執行你的爬蟲主程式
+    # ⚠️ 請把 main.py 換成你實際的 Python 檔名
+    - name: Run Python Scraper
+      run: |
+        python main.py
