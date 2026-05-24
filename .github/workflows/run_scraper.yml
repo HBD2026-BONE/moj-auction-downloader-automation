@@ -47,11 +47,10 @@ jobs:
       run: |
         python PF/f-11.py
 
-    # 7. 自動把爬蟲下載的檔案推回 GitHub 儲存庫
-    - name: Upload Scraper Results
+    # 7. 強制將爬蟲產出的「法拍_汽機車」成果資料夾打包上傳
+    - name: Upload Scraper Results Folder
       uses: actions/upload-artifact@v4
       with:
-        name: moj-download-data # 下載下來的壓縮包名稱
-        path: |
-          ./*
-          ~/.config/google-chrome
+        name: 法拍公告下載成果 # 這是你等一下在網頁上會看到的下載按鈕名稱
+        path: 法拍_汽機車/ # 精準指定只打包這個新產生的成果資料夾
+        if-no-files-found: warn # 如果真的沒檔案，會在日誌發出警告
