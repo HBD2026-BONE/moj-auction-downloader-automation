@@ -1,3 +1,4 @@
 ddddocr
 selenium
 selenium-stealth
+requests
