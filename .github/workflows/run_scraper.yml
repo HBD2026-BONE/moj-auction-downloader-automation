@@ -51,6 +51,6 @@ jobs:
     - name: Upload Scraper Results Folder
       uses: actions/upload-artifact@v4
       with:
-        name: 法拍公告下載成果 # 這是你等一下在網頁上會看到的下載按鈕名稱
-        path: 法拍_汽機車/ # 精準指定只打包這個新產生的成果資料夾
-        if-no-files-found: warn # 如果真的沒檔案，會在日誌發出警告
+        name: 法拍公告下載成果
+        path: ./法拍_汽機車 # 加上 ./ 確保從根目錄絕對指引
+        if-no-files-found: error # 如果這次再找不到，直接讓這一步亮紅燈報錯，不要再讓它假裝成功騙我們！
