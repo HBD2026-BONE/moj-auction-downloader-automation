@@ -47,10 +47,12 @@ jobs:
       run: |
         python PF/f-11.py
 
-    # 7. 強制將爬蟲產出的「法拍_汽機車」成果資料夾打包上傳
+    # 7. 雙重保險：不管資料夾生在根目錄還是 PF 目錄，通通翻出來打包！
     - name: Upload Scraper Results Folder
       uses: actions/upload-artifact@v4
       with:
         name: 法拍公告下載成果
-        path: ./法拍_汽機車 # 加上 ./ 確保從根目錄絕對指引
-        if-no-files-found: error # 如果這次再找不到，直接讓這一步亮紅燈報錯，不要再讓它假裝成功騙我們！
+        path: |
+          ./法拍_汽機車
+          ./PF/法拍_汽機車
+        if-no-files-found: error # 如果兩邊都真的沒有，再亮紅燈
