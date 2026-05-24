@@ -18,7 +18,7 @@ from selenium_stealth import stealth
 # ⚙️ 全域參數設定區 
 # ==========================================
 THE_USE_TEXT = "汽機車" 
-DEPT_INDEX = [1, 2, 4, 13, 5, 6,7,8,9,10]               
+DEPT_INDEX = [2]               
 DATE_START = "2026/06/01"      
 DATE_END = "2026/06/30"        
 
