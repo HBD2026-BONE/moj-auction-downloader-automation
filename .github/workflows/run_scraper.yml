@@ -42,17 +42,18 @@ jobs:
         pip install -r PF/requirements.txt
 
     # 6. 執行你的爬蟲主程式
-    # ⚠️ 請把 main.py 換成你實際的 Python 檔名
     - name: Run Python Scraper
       run: |
+        # 先在根目錄手動建立資料夾，確保 Linux 權限沒問題
+        mkdir -p ./法拍_汽機車
+        # 執行爬蟲
         python PF/f-11.py
 
-    # 7. 雙重保險：不管資料夾生在根目錄還是 PF 目錄，通通翻出來打包！
+    # 7. 成果打包上傳
     - name: Upload Scraper Results Folder
       uses: actions/upload-artifact@v4
       with:
         name: 法拍公告下載成果
-        path: |
-          ./法拍_汽機車
-          ./PF/法拍_汽機車
-        if-no-files-found: error # 如果兩邊都真的沒有，再亮紅燈
+        # 這裡只指向最乾淨的根目錄路徑
+        path: ./法拍_汽機車/
+        if-no-files-found: error
