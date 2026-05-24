@@ -28,8 +28,10 @@ DEPT_MAP = {
     9: "台南分署", 10: "高雄分署", 11: "屏東分署", 12: "花蓮分署",
     13: "士林分署", 14: "宜蘭分署"
 }
-
-BASE_DOWNLOAD_PATH = os.path.join(os.getcwd(), f"法拍_{THE_USE_TEXT}")
+current_script_dir = os.path.dirname(os.path.abspath(__file__))
+BASE_DOWNLOAD_PATH = os.path.abspath(os.path.join(current_script_dir, "..", f"法拍_{THE_USE_TEXT}"))
+print(f"[*] 最終檔案儲存絕對路徑設定為: {BASE_DOWNLOAD_PATH}")
+#BASE_DOWNLOAD_PATH = os.path.join(os.getcwd(), f"法拍_{THE_USE_TEXT}")
 
 # ==========================================
 
