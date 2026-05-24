@@ -45,4 +45,4 @@ jobs:
     # ⚠️ 請把 main.py 換成你實際的 Python 檔名
     - name: Run Python Scraper
       run: |
-        python main.py
+        python f-11.py
