@@ -46,3 +46,12 @@ jobs:
     - name: Run Python Scraper
       run: |
         python PF/f-11.py
+
+    # 7. 自動把爬蟲下載的檔案推回 GitHub 儲存庫
+    - name: Commit and Push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add .
+        # 檢查有沒有新下載的檔案，有才提交，避免報錯
+        git diff --quiet && git diff --staged --quiet || (git commit -m "🤖 自動更新：下載最新法拍公告資料" && git push)
